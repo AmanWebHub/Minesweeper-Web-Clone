@@ -295,4 +295,3 @@ difficultySelect.addEventListener("change", (e) => {
 // Init
 setDifficulty(difficultySelect.value);
 generateBoard();
-toggleSound(); // Initialize sound button state
