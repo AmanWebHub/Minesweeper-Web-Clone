@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minesweeper Web Clone</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+
+<body>
+    <div id="game-container">
+        <h1>Minesweeper</h1>
+
+        <div id="status-bar">
+            <div class="status-item">
+                <div class="status-label">MINES</div>
+                <div id="mines-count" class="status-value">15</div>
+            </div>
+            <div class="status-item">
+                <div class="status-label">FLAGS</div>
+                <div id="flags-count" class="status-value">0</div>
+            </div>
+            <div class="status-item">
+                <div class="status-label">TAGS</div>
+                <div id="tags-count" class="status-value">0</div>
+            </div>
+        </div>
+
+        <!-- Status message instead of alerts -->
+        <div id="message"></div>
+
+        <div id="game-board"></div>
+
+        <div id="controls">
+            <select id="difficulty">
+                <option value="easy">Easy (8x8, 10 mines)</option>
+                <option value="medium" selected>Medium (10x10, 15 mines)</option>
+                <option value="hard">Hard (16x16, 40 mines)</option>
+            </select>
+            <button id="restart-btn">Restart</button>
+            <button id="tag-toggle">Tag Mode: Off</button>
+            <button id="sound-toggle" class="sound-on">Sound: On</button>
+        </div>
+
+        <div id="instructions">
+            <h3>How to Play:</h3>
+            <ul>
+                <li><strong>Left-click</strong> to reveal a tile</li>
+                <li><strong>Right-click</strong> to place/remove a flag (marks suspected mines)</li>
+                <li>Toggle <strong>Tag Mode</strong> to place question marks (marks uncertain tiles)</li>
+                <li>Use the <strong>Sound</strong> button to toggle sound effects</li>
+                <li>Clear all non-mine tiles to win the game</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Audio elements for sound effects -->
+    <audio id="click-sound" src="/assets/audio/click.wav" preload="auto"></audio>
+    <audio id="flag-sound" src="/assets/audio/flag.wav" preload="auto"></audio>
+    <audio id="win-sound" src="/assets/audio/win.wav" preload="auto"></audio>
+    <audio id="lose-sound" src="/assets/audio/lose_minesweeper.wav" preload="auto"></audio>
+    <audio id="reveal-sound" src="/assets/audio/reveal.wav" preload="auto"></audio>
+    <script src="/assets/js/script.js"></script>
+</body>
+
+</html>
