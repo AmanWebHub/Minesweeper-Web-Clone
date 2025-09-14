@@ -39,7 +39,6 @@ function setDifficulty(level) {
         rows = 16; cols = 16; totalMines = 40;
     }
 
-    // Update grid size in CSS
     gameBoard.style.gridTemplateColumns = `repeat(${cols}, 35px)`;
     gameBoard.style.gridTemplateRows = `repeat(${rows}, 35px)`;
 }
@@ -50,9 +49,16 @@ function showMessage(text, type = "") {
     messageEl.className = type;
 }
 
-// Generate a blank board
+// ✅ Fixed generateBoard()
 function generateBoard() {
     messageEl.textContent = "";
+
+    // reset state BEFORE rendering
+    gameOver = false;
+    gameWon = false;
+    flagsPlaced = 0;
+    tagsPlaced = 0;
+
     board = Array.from({ length: rows }, () =>
         Array.from({ length: cols }, () => ({
             mine: false,
@@ -66,10 +72,6 @@ function generateBoard() {
     placeMines();
     calculateAdjacentMines();
     renderBoard();
-    gameOver = false;
-    gameWon = false;
-    flagsPlaced = 0;
-    tagsPlaced = 0;
     updateCounters();
 }
 
@@ -176,7 +178,6 @@ function handleRightClick(e, r, c) {
     if (gameOver || gameWon || board[r][c].opened) return;
 
     if (tagMode) {
-        // Tag mode → toggle ?
         if (board[r][c].tagged) {
             board[r][c].tagged = false;
             tagsPlaced--;
@@ -186,7 +187,6 @@ function handleRightClick(e, r, c) {
         }
         playSound(clickSound);
     } else {
-        // Normal mode → toggle 🚩
         if (board[r][c].flagged) {
             board[r][c].flagged = false;
             flagsPlaced--;
@@ -282,7 +282,7 @@ function toggleSound() {
 // Event listeners
 restartBtn.addEventListener("click", () => {
     playSound(clickSound);
-    setDifficulty(difficultySelect.value); // ✅ Fix restart
+    setDifficulty(difficultySelect.value);
     generateBoard();
 });
 tagToggleBtn.addEventListener("click", toggleTagMode);
@@ -295,3 +295,4 @@ difficultySelect.addEventListener("change", (e) => {
 // Init
 setDifficulty(difficultySelect.value);
 generateBoard();
+toggleSound(); // Initialize sound button state
